@@ -57,6 +57,10 @@ def crawl(url, depth=0):
         try:
             r = requests.get(url, timeout=timeout)
             if 'html' in r.headers['Content-Type']:
+                # no need to crawl the content
+                if depth > max_depth:
+                    return
+
                 if verbose:
                     print('.' * depth + url)
 
